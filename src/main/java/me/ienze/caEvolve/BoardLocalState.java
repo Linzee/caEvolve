@@ -3,27 +3,58 @@ package me.ienze.caEvolve;
 import java.util.Iterator;
 
 /**
- * @author ienze.
+ * @author ienze
  */
 class BoardLocalState implements Iterator<BoardLocalState> {
 
-    private Board board;
+    private final Board board;
     private int x;
     private int y;
 
-    public int getNumericRepresentation() {
-        return 0; //TODO num rep
+    public BoardLocalState(Board board) {
+        this(board, 0, 0);
+    }
+
+    public BoardLocalState(Board board, int x, int y) {
+        this.board = board;
+        this.x = x;
+        this.y = y;
     }
 
     public boolean hasNext() {
-        return false;
+        return x != board.getWidth() && y != board.getHeight();
     }
 
     public BoardLocalState next() {
-        return null;
+        x++;
+        if (x >= board.getWidth()) {
+            x = 0;
+            y++;
+        }
+        return this;
     }
 
-    public void remove() {
+    public int getNumericRepresentation() {
+        int num = 0, i = 0;
 
+        int visibleRadius = board.getSettings().visibleRadius;
+
+        for(int dx=-visibleRadius; dx<=visibleRadius; dx++) {
+            for(int dy=-visibleRadius; dy<=visibleRadius; dy++) {
+                int g = board.get(x + dx, y + dy);
+                num += (int) Math.pow(board.getSettings().stateCount, i) * g;
+                i++;
+            }
+        }
+
+        return num;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

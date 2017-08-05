@@ -1,7 +1,7 @@
 package me.ienze.caEvolve;
 
 /**
- * @author ienze.
+ * @author ienze
  */
 class DeterministicCA implements CA {
 

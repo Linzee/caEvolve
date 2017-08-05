@@ -3,7 +3,7 @@ package me.ienze.caEvolve;
 import java.util.Random;
 
 /**
- * @author ienze.
+ * @author ienze
  */
 class CaEvolveSettings {
 
@@ -14,6 +14,9 @@ class CaEvolveSettings {
     public final int boardWidth = 10;
     public final int boardHeight = 10;
     public final int poolSize = 12;
+
+    public final float mutateCaChance = 0.1f;
+    public final float mutateGeneChance = 0.01f;
 
     public int getPossibleStatesCount() {
         return (int) Math.pow(stateCount, (visibleRadius*2+1)*(visibleRadius*2+1));

@@ -1,7 +1,7 @@
 package me.ienze.caEvolve;
 
 /**
- * @author ienze.
+ * @author ienze
  */
 class CaEvolveUtils {
 
@@ -12,31 +12,37 @@ class CaEvolveUtils {
     }
 
     public void mutate(DeterministicCA ca) {
-        ca.transitions[settings.random.nextInt(settings.getPossibleStatesCount())] = settings.random.nextInt(settings.stateCount);
-    }
-
-    public void crossover(DeterministicCA ca1, DeterministicCA ca2) {
-        for (int i = 0; i < settings.getPossibleStatesCount(); ++i) {
-            if (settings.random.nextBoolean()) {
-                int temp = ca1.transitions[i];
-                ca1.transitions[i] = ca2.transitions[i];
-                ca2.transitions[i] = temp;
+        for(int i=0; i<settings.getPossibleStatesCount(); i++) {
+            if(settings.random.nextFloat() < settings.mutateGeneChance) {
+                ca.transitions[i] = settings.random.nextInt(settings.stateCount);
             }
         }
+    }
+
+    public DeterministicCA crossover(DeterministicCA ca1, DeterministicCA ca2) {
+        DeterministicCA ca = new DeterministicCA(settings);
+
+        for (int i = 0; i < settings.getPossibleStatesCount(); ++i) {
+            ca.transitions[i] = settings.random.nextBoolean() ? ca1.transitions[i] : ca2.transitions[i];
+        }
+
+        return ca;
     }
 
     public void mutate(CA ca) {
         if(ca instanceof DeterministicCA) {
             mutate((DeterministicCA) ca);
+        } else {
+            throw new IllegalArgumentException("This type of CA is not supported");
         }
-        throw new IllegalArgumentException("This type of CA is not supported");
     }
 
-    public void crossover(CA ca1, CA ca2) {
+    public CA crossover(CA ca1, CA ca2) {
         if(ca1 instanceof DeterministicCA && ca2 instanceof DeterministicCA) {
-            crossover((DeterministicCA) ca1, (DeterministicCA) ca2);
+            return crossover((DeterministicCA) ca1, (DeterministicCA) ca2);
+        } else {
+            throw new IllegalArgumentException("This type of CA is not supported");
         }
-        throw new IllegalArgumentException("This type of CA is not supported");
     }
 
 }
