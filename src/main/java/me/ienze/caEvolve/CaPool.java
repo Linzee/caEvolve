@@ -11,7 +11,9 @@ abstract class CaPool<C extends CA> {
     private CaEvolveSettings settings;
     private FitnessCalculator fitnessCalculator;
     private CaEvolveUtils evolveUtils;
+
     protected C[] cas;
+    private int generation;
 
     public CaPool(CaEvolveSettings settings, FitnessCalculator fitnessCalculator) {
         this.settings = settings;
@@ -54,6 +56,9 @@ abstract class CaPool<C extends CA> {
                 evolveUtils.mutate(cas[i]);
             }
         }
+
+        generation++;
+        System.out.println("Generation "+generation);
     }
 
 
