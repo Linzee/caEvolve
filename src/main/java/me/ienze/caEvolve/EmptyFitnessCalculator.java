@@ -40,6 +40,7 @@ public class EmptyFitnessCalculator implements FitnessCalculator {
             //save result
             try {
                 boardImageWriter.write(board, new File("out/"+caIndex+".png"));
+                ca.setPreviewImage(boardImageWriter.generateImage(board));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,5 +63,9 @@ public class EmptyFitnessCalculator implements FitnessCalculator {
     @Override
     public double getFitness(CA ca) {
         return calculated.get(ca);
+    }
+
+    public HashMap<CA, Double> getCalculated() {
+        return calculated;
     }
 }

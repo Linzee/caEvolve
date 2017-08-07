@@ -1,10 +1,16 @@
 package me.ienze.caEvolve;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 /**
  * @author ienze
  */
-interface CA {
+public interface CA {
 
     int get(BoardLocalState localState);
 
+    Image getPreviewImage();
+
+    void setPreviewImage(Image image);
 }

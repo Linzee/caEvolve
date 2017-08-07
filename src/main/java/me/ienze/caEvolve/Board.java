@@ -7,7 +7,7 @@ import java.util.Iterator;
 /**
  * @author ienze
  */
-class Board extends DistinctMapLayer implements Iterable<BoardLocalState> {
+public class Board extends DistinctMapLayer implements Iterable<BoardLocalState> {
 
     private CaEvolveSettings settings;
 

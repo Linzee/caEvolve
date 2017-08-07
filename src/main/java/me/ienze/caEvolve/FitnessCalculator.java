@@ -3,7 +3,7 @@ package me.ienze.caEvolve;
 /**
  * @author ienze
  */
-interface FitnessCalculator {
+public interface FitnessCalculator {
 
     void calculateFitnesses(CA[] cas);
 

@@ -3,26 +3,86 @@ package me.ienze.caEvolve;
 /**
  * @author ienze
  */
-class CaEvolve {
+public class CaEvolve {
 
-    public static void main(String[] args) {
+    private boolean running;
+    private Object runningLock = new Object();
 
-        CaEvolveSettings settings = new CaEvolveSettings();
+    CaEvolveSettings settings;
+    FitnessCalculator fitnessCalculator;
+    CaPool<DeterministicCA> pool;
 
-        FitnessCalculator fitnessCalculator = new EmptyFitnessCalculator(settings);
+    public CaEvolve() {
+        init();
 
-        CaPool<DeterministicCA> pool = new CaPool<DeterministicCA>(settings, fitnessCalculator) {
+        startRunner();
+    }
+
+    private void startRunner() {
+        Runnable runnable = new Runnable() {
             @Override
-            public void init() {
-                cas = new DeterministicCA[settings.poolSize];
-                for (int i=0; i<cas.length; i++) {
-                    cas[i] = new DeterministicCA(settings);
+            public void run() {
+                while (true) {
+                    boolean isRunning = true;
+                    synchronized (runningLock) {
+                        isRunning = running;
+                    }
+
+                    if (isRunning) {
+                        pool.nextGeneration();
+                    } else {
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         };
 
-        while(true) {
-            pool.nextGeneration();
+        new Thread(runnable).start();
+    }
+
+    public boolean getRunning() {
+        synchronized (runningLock) {
+            return running;
         }
+    }
+
+    public void setRunning(boolean value) {
+        synchronized (runningLock) {
+            running = value;
+        }
+    }
+
+    public void init() {
+        setRunning(false);
+
+        settings = new CaEvolveSettings();
+
+        fitnessCalculator = new EmptyFitnessCalculator(settings);
+
+        pool = new CaPool<DeterministicCA>(settings, fitnessCalculator) {
+            @Override
+            public void init() {
+                cas = new DeterministicCA[settings.poolSize];
+                for (int i = 0; i < cas.length; i++) {
+                    cas[i] = new DeterministicCA(settings);
+                }
+            }
+        };
+    }
+
+    public FitnessCalculator getFitnessCalculator() {
+        return fitnessCalculator;
+    }
+
+    public CaPool<DeterministicCA> getPool() {
+        return pool;
+    }
+
+    public CaEvolveSettings getSettings() {
+        return settings;
     }
 }

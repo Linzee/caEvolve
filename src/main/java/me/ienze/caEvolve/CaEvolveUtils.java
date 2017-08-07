@@ -3,7 +3,7 @@ package me.ienze.caEvolve;
 /**
  * @author ienze
  */
-class CaEvolveUtils {
+public class CaEvolveUtils {
 
     private CaEvolveSettings settings;
 

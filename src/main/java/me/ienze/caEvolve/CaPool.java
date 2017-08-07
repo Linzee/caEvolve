@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * @author ienze
  */
-abstract class CaPool<C extends CA> {
+public abstract class CaPool<C extends CA> {
 
     private CaEvolveSettings settings;
     private FitnessCalculator fitnessCalculator;
@@ -32,11 +32,7 @@ abstract class CaPool<C extends CA> {
         //semi sort by fitness
         Arrays.sort(cas, new Comparator<C>() {
             public int compare(C c1, C c2) {
-//                if (settings.random.nextBoolean()) {
-                    return Double.compare(fitnessCalculator.getFitness(c1), fitnessCalculator.getFitness(c2));
-//                } else {
-//                    return 0;
-//                }
+                return Double.compare(fitnessCalculator.getFitness(c1), fitnessCalculator.getFitness(c2));
             }
         });
 
@@ -61,5 +57,7 @@ abstract class CaPool<C extends CA> {
         System.out.println("Generation "+generation);
     }
 
-
+    public C[] getCas() {
+        return cas;
+    }
 }

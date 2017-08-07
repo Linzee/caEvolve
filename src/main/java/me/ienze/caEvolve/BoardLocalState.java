@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * @author ienze
  */
-class BoardLocalState implements Iterator<BoardLocalState> {
+public class BoardLocalState implements Iterator<BoardLocalState> {
 
     private final Board board;
     private int x;
