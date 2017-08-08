@@ -1,8 +1,7 @@
 package me.ienze.caEvolve;
 
-import me.ienze.caEvolve.fitness.ChessFitnessCalculator;
-import me.ienze.caEvolve.fitness.EmptyFitnessCalculator;
-import me.ienze.caEvolve.fitness.NeighborFitnessCalculator;
+import me.ienze.caEvolve.ca.DeterministicCA;
+import me.ienze.caEvolve.fitness.SimillarStateFitnessCalculator;
 
 /**
  * @author ienze
@@ -65,7 +64,7 @@ public class CaEvolve {
 
         settings = new CaEvolveSettings();
 
-        fitnessCalculator = new NeighborFitnessCalculator(settings);
+        fitnessCalculator = new SimillarStateFitnessCalculator(settings);
 
         pool = new CaPool<DeterministicCA>(settings, fitnessCalculator) {
             @Override

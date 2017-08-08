@@ -1,6 +1,8 @@
-package me.ienze.caEvolve;
+package me.ienze.caEvolve.ca;
 
-import me.ienze.caEvolve.ui.CaPreview;
+import me.ienze.caEvolve.BoardLocalState;
+import me.ienze.caEvolve.CA;
+import me.ienze.caEvolve.CaEvolveSettings;
 
 import java.awt.Image;
 

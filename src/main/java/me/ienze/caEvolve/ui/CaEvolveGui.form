@@ -33,6 +33,13 @@
               <text value="Run"/>
             </properties>
           </component>
+          <component id="26069" class="javax.swing.JLabel" binding="labelGeneration">
+            <constraints/>
+            <properties>
+              <horizontalAlignment value="10"/>
+              <text value="Generation"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <scrollpane id="dc511" binding="mainContainerScroll">

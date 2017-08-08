@@ -22,6 +22,7 @@ public class CaEvolveGui extends JFrame {
     private JCheckBox checkBoxRun;
     private JScrollPane mainContainerScroll;
     private JPanel mainContainer;
+    private JLabel labelGeneration;
 
     public CaEvolveGui(CaEvolve caEvolve) {
         this.caEvolve = caEvolve;
@@ -53,8 +54,12 @@ public class CaEvolveGui extends JFrame {
 
         initCaPreviews();
 
+        mainContainer.setLayout(new WrapLayout());
+
         ActionListener timerTaskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
+
+                //Update CA previews
                 CA[] calculated = caEvolve.getFitnessCalculator().getLastCalculated();
                 if(calculated == null) {
                     return;
@@ -71,9 +76,12 @@ public class CaEvolveGui extends JFrame {
                     ((CaPreview) c).setCa(ca);
                     c.repaint();
                 }
+
+                //Update generation counter
+                labelGeneration.setText("Generation "+caEvolve.getPool().getGeneration());
             }
         };
-        Timer timer = new Timer(1000, timerTaskPerformer);
+        Timer timer = new Timer(3300, timerTaskPerformer);
         timer.setRepeats(true);
         timer.start();
     }

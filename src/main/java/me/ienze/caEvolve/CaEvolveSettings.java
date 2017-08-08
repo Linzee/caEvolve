@@ -9,12 +9,12 @@ public class CaEvolveSettings {
 
     public final Random random = new Random();
 
-    public final int stateCount = 2;
+    public final int stateCount = 3;
     public final int visibleRadius = 1;
-    public final int boardWidth = 30;
-    public final int boardHeight = 30;
-    public final int boardSteps = 10;
-    public final int poolSize = 100;
+    public final int boardWidth = 20;
+    public final int boardHeight = 20;
+    public final int boardSteps = 8;
+    public final int poolSize = 400;
 
     public final float mutateCaChance = 0.30f;
     public final float mutateGeneChance = 0.30f;

@@ -60,4 +60,8 @@ public abstract class CaPool<C extends CA> {
     public C[] getCas() {
         return cas;
     }
+
+    public int getGeneration() {
+        return generation;
+    }
 }
