@@ -2,8 +2,7 @@ package me.ienze.caEvolve.ui;
 
 import me.ienze.caEvolve.CA;
 import me.ienze.caEvolve.CaEvolve;
-import me.ienze.caEvolve.DeterministicCA;
-import me.ienze.caEvolve.EmptyFitnessCalculator;
+import me.ienze.caEvolve.fitness.EmptyFitnessCalculator;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -11,7 +10,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.Component;
 import java.awt.event.*;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 
 public class CaEvolveGui extends JFrame {
@@ -57,7 +55,7 @@ public class CaEvolveGui extends JFrame {
 
         ActionListener timerTaskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                CA[] calculated = ((EmptyFitnessCalculator) caEvolve.getFitnessCalculator()).getLastCalculated();
+                CA[] calculated = caEvolve.getFitnessCalculator().getLastCalculated();
                 if(calculated == null) {
                     return;
                 }

@@ -17,7 +17,7 @@ public class Board extends DistinctMapLayer implements Iterable<BoardLocalState>
         forEach(state -> set(state.getX(), state.getY(), settings.random.nextInt(settings.stateCount)));
     }
 
-    void step(CA ca) {
+    public void step(CA ca) {
         forEach(localState -> set(localState.getX(), localState.getY(), ca.get(localState)));
     }
 

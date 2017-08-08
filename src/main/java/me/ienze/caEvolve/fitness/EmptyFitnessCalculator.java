@@ -1,5 +1,9 @@
-package me.ienze.caEvolve;
+package me.ienze.caEvolve.fitness;
 
+import me.ienze.caEvolve.Board;
+import me.ienze.caEvolve.CA;
+import me.ienze.caEvolve.CaEvolveSettings;
+import me.ienze.caEvolve.FitnessCalculator;
 import me.ienze.twoDimMap.DistinctMapLayer;
 import me.ienze.twoDimMap.io.DistinctMapImageWriter;
 
@@ -50,21 +54,12 @@ public class EmptyFitnessCalculator implements FitnessCalculator {
             double sum = 0;
             for(int x=0; x<board.getWidth(); x++) {
                 for(int y=0; y<board.getHeight(); y++) {
-                    sum += (board.get(x, y) != board.get(x+1, y) ? 1 : 0);
+                    sum += board.get(x, y);
                 }
             }
 
-            double fitness = (sum / (board.getWidth() * board.getHeight()));
-
-             sum = 0;
-            for(int x=0; x<board.getWidth(); x++) {
-                for(int y=0; y<board.getHeight(); y++) {
-                    sum += (board.get(x, y) != board.get(x, y+1) ? 1 : 0);
-                }
-            }
-
-            double fitness2 = (sum / (board.getWidth() * board.getHeight()));
-            ca.setFitness((fitness+fitness2) / 2);
+            double fitness = 1 - (sum / (board.getWidth() * board.getHeight()));
+            ca.setFitness(fitness);
 
             caIndex++;
         }

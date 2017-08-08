@@ -7,4 +7,5 @@ public interface FitnessCalculator {
 
     void calculateFitnesses(CA[] cas);
 
+    CA[] getLastCalculated();
 }
