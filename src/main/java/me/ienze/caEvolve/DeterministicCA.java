@@ -11,7 +11,8 @@ public class DeterministicCA implements CA {
 
     private final CaEvolveSettings settings;
     public int[] transitions;
-    public Image previewImage;
+    private double fitness;
+    private Image previewImage;
 
     public DeterministicCA(CaEvolveSettings settings) {
         this.settings = settings;
@@ -34,5 +35,15 @@ public class DeterministicCA implements CA {
     @Override
     public void setPreviewImage(Image image) {
         previewImage = image;
+    }
+
+    @Override
+    public void setFitness(double fitness) {
+        this.fitness = fitness;
+    }
+
+    @Override
+    public double getFitness() {
+        return fitness;
     }
 }

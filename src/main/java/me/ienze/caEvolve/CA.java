@@ -13,4 +13,8 @@ public interface CA {
     Image getPreviewImage();
 
     void setPreviewImage(Image image);
+
+    void setFitness(double fitness);
+
+    double getFitness();
 }

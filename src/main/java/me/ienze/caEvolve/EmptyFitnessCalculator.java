@@ -6,6 +6,7 @@ import me.ienze.twoDimMap.io.DistinctMapImageWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -14,7 +15,7 @@ import java.util.HashMap;
 public class EmptyFitnessCalculator implements FitnessCalculator {
 
     private CaEvolveSettings settings;
-    private HashMap<CA, Double> calculated;
+    private CA[] lastCalculated;
 
     public EmptyFitnessCalculator(CaEvolveSettings settings) {
         this.settings = settings;
@@ -22,7 +23,7 @@ public class EmptyFitnessCalculator implements FitnessCalculator {
 
     @Override
     public void calculateFitnesses(CA[] cas) {
-        calculated = new HashMap<>();
+        lastCalculated = Arrays.copyOf(cas, cas.length);
 
         DistinctMapImageWriter boardImageWriter = new DistinctMapImageWriter();
 
@@ -49,23 +50,27 @@ public class EmptyFitnessCalculator implements FitnessCalculator {
             double sum = 0;
             for(int x=0; x<board.getWidth(); x++) {
                 for(int y=0; y<board.getHeight(); y++) {
-                    sum += board.get(x, y);
+                    sum += (board.get(x, y) != board.get(x+1, y) ? 1 : 0);
                 }
             }
 
-            double fitness = sum / (board.getWidth() * board.getHeight());
-            calculated.put(ca, fitness);
+            double fitness = (sum / (board.getWidth() * board.getHeight()));
+
+             sum = 0;
+            for(int x=0; x<board.getWidth(); x++) {
+                for(int y=0; y<board.getHeight(); y++) {
+                    sum += (board.get(x, y) != board.get(x, y+1) ? 1 : 0);
+                }
+            }
+
+            double fitness2 = (sum / (board.getWidth() * board.getHeight()));
+            ca.setFitness((fitness+fitness2) / 2);
 
             caIndex++;
         }
     }
 
-    @Override
-    public double getFitness(CA ca) {
-        return calculated.get(ca);
-    }
-
-    public HashMap<CA, Double> getCalculated() {
-        return calculated;
+    public CA[] getLastCalculated() {
+        return lastCalculated;
     }
 }

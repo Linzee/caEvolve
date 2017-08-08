@@ -57,11 +57,11 @@ public class CaEvolveGui extends JFrame {
 
         ActionListener timerTaskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                HashMap<CA, Double> calculated = ((EmptyFitnessCalculator) caEvolve.getFitnessCalculator()).getCalculated();
+                CA[] calculated = ((EmptyFitnessCalculator) caEvolve.getFitnessCalculator()).getLastCalculated();
                 if(calculated == null) {
                     return;
                 }
-                Iterator<CA> cas = calculated.keySet().iterator();
+                Iterator<CA> cas = Arrays.stream(calculated).iterator();
 
                 for(Component c : mainContainer.getComponents()) {
 

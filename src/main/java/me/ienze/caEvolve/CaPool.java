@@ -32,7 +32,7 @@ public abstract class CaPool<C extends CA> {
         //semi sort by fitness
         Arrays.sort(cas, new Comparator<C>() {
             public int compare(C c1, C c2) {
-                return Double.compare(fitnessCalculator.getFitness(c1), fitnessCalculator.getFitness(c2));
+                return Double.compare(c2.getFitness(), c1.getFitness());
             }
         });
 
