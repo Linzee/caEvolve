@@ -1,7 +1,6 @@
 package me.ienze.caEvolve;
 
 import me.ienze.caEvolve.ca.DeterministicCA;
-import me.ienze.caEvolve.fitness.SimillarStateFitnessCalculator;
 
 /**
  * @author ienze
@@ -11,9 +10,8 @@ public class CaEvolve {
     private boolean running;
     private Object runningLock = new Object();
 
-    CaEvolveSettings settings;
-    FitnessCalculator fitnessCalculator;
-    CaPool<DeterministicCA> pool;
+    private CaEvolveSettings settings;
+    private CaPool<DeterministicCA> pool;
 
     public CaEvolve() {
         init();
@@ -26,7 +24,7 @@ public class CaEvolve {
             @Override
             public void run() {
                 while (true) {
-                    boolean isRunning = true;
+                    boolean isRunning;
                     synchronized (runningLock) {
                         isRunning = running;
                     }
@@ -64,9 +62,7 @@ public class CaEvolve {
 
         settings = new CaEvolveSettings();
 
-        fitnessCalculator = new SimillarStateFitnessCalculator(settings);
-
-        pool = new CaPool<DeterministicCA>(settings, fitnessCalculator) {
+        pool = new CaPool<DeterministicCA>(settings) {
             @Override
             public void init() {
                 cas = new DeterministicCA[settings.poolSize];
@@ -78,7 +74,7 @@ public class CaEvolve {
     }
 
     public FitnessCalculator getFitnessCalculator() {
-        return fitnessCalculator;
+        return settings.fitnessCalculator;
     }
 
     public CaPool<DeterministicCA> getPool() {

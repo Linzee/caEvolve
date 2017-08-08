@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="me.ienze.caEvolve.ui.CaPreviewGui">
+  <grid id="cbd77" binding="wrapperContainer" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="48" y="54" width="436" height="297"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="dcf2d" binding="topContainer" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="27a5a" class="javax.swing.JLabel" binding="labelFitness">
+            <constraints/>
+            <properties>
+              <text value="Fitness"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="4dcfa" binding="mainContainer" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="3a1ad" binding="bottomContainer" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="daa39" class="javax.swing.JButton" binding="buttonRestart">
+            <constraints/>
+            <properties>
+              <text value="Restart"/>
+            </properties>
+          </component>
+          <component id="fe308" class="javax.swing.JButton" binding="buttonStep">
+            <constraints/>
+            <properties>
+              <text value="Step"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

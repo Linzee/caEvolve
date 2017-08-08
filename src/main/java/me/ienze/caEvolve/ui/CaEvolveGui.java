@@ -2,13 +2,14 @@ package me.ienze.caEvolve.ui;
 
 import me.ienze.caEvolve.CA;
 import me.ienze.caEvolve.CaEvolve;
-import me.ienze.caEvolve.fitness.EmptyFitnessCalculator;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.Component;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -29,6 +30,7 @@ public class CaEvolveGui extends JFrame {
 
         setTitle("CaEvolve");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(1000, 500));
 
         setContentPane(wrapperContainer);
 
@@ -60,15 +62,15 @@ public class CaEvolveGui extends JFrame {
             public void actionPerformed(ActionEvent evt) {
 
                 //Update CA previews
-                CA[] calculated = caEvolve.getFitnessCalculator().getLastCalculated();
-                if(calculated == null) {
+                CA[] calculated = caEvolve.getPool().getOldCas();
+                if (calculated == null) {
                     return;
                 }
                 Iterator<CA> cas = Arrays.stream(calculated).iterator();
 
-                for(Component c : mainContainer.getComponents()) {
+                for (Component c : mainContainer.getComponents()) {
 
-                    if(!cas.hasNext()) {
+                    if (!cas.hasNext()) {
                         break;
                     }
 
@@ -78,7 +80,7 @@ public class CaEvolveGui extends JFrame {
                 }
 
                 //Update generation counter
-                labelGeneration.setText("Generation "+caEvolve.getPool().getGeneration());
+                labelGeneration.setText("Generation " + caEvolve.getPool().getGeneration());
             }
         };
         Timer timer = new Timer(3300, timerTaskPerformer);
@@ -89,8 +91,8 @@ public class CaEvolveGui extends JFrame {
     private void initCaPreviews() {
         mainContainer.removeAll();
 
-        for(CA ca : caEvolve.getPool().getCas()) {
-            mainContainer.add(new CaPreview(caEvolve.getSettings(), ca));
+        for (int i=0; i<caEvolve.getSettings().poolSize; i++) {
+            mainContainer.add(new CaPreview(caEvolve.getSettings()));
         }
 
         mainContainer.revalidate();

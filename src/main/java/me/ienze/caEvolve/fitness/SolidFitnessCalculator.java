@@ -7,12 +7,12 @@ import me.ienze.caEvolve.FitnessCalculator;
 /**
  * @author ienze
  */
-public class NeighborFitnessCalculator implements FitnessCalculator {
+public class SolidFitnessCalculator implements FitnessCalculator {
 
-    private int idealNeighbors;
+    private int idealColor;
 
-    public NeighborFitnessCalculator(int idealNeighbors) {
-        this.idealNeighbors = idealNeighbors;
+    public SolidFitnessCalculator() {
+        this.idealColor = idealColor;
     }
 
     @Override
@@ -29,22 +29,11 @@ public class NeighborFitnessCalculator implements FitnessCalculator {
             double sum = 0;
             for (int x = 0; x < board.getWidth(); x++) {
                 for (int y = 0; y < board.getHeight(); y++) {
-                    int n = 0;
-
-                    for (int dx = -1; dx <= 1; dx++) {
-                        for (int dy = -1; dy <= 1; dy++) {
-                            if (dx == 0 && dy == 0)
-                                continue;
-
-                            n += board.get(x + dx, y + dy);
-                        }
-                    }
-
-                    sum += Math.abs(n - idealNeighbors);
+                    sum += board.get(x, y) == idealColor ? 1 : 0;
                 }
             }
 
-            double fitness = 1 - (sum / (board.getWidth() * board.getHeight() * 8));
+            double fitness = 1 - (sum / (board.getWidth() * board.getHeight()));
             fitnesses[i] = fitness;
         }
 

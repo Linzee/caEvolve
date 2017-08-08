@@ -18,7 +18,9 @@ public class Board extends DistinctMapLayer implements Iterable<BoardLocalState>
     }
 
     public void step(CA ca) {
-        forEach(localState -> set(localState.getX(), localState.getY(), ca.get(localState)));
+        Integer[][] newData = new Integer[getWidth()][getHeight()];
+        forEach(localState -> newData[localState.getX()][localState.getY()] = ca.get(localState));
+        data = newData;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package me.ienze.caEvolve;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 /**
  * @author ienze
@@ -14,7 +13,11 @@ public interface CA {
 
     void setPreviewImage(Image image);
 
+    double getFitness();
+
     void setFitness(double fitness);
 
-    double getFitness();
+    Board getResultBoard();
+
+    void setResultBoard(Board board);
 }

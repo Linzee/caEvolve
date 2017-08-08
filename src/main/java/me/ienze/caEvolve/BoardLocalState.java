@@ -22,7 +22,7 @@ public class BoardLocalState implements Iterator<BoardLocalState> {
     }
 
     public boolean hasNext() {
-        return x != board.getWidth() && y != board.getHeight();
+        return x != board.getWidth()-1 || y != board.getHeight()-1;
     }
 
     public BoardLocalState next() {
@@ -39,8 +39,8 @@ public class BoardLocalState implements Iterator<BoardLocalState> {
 
         int visibleRadius = board.getSettings().visibleRadius;
 
-        for(int dx=-visibleRadius; dx<=visibleRadius; dx++) {
-            for(int dy=-visibleRadius; dy<=visibleRadius; dy++) {
+        for (int dx = -visibleRadius; dx <= visibleRadius; dx++) {
+            for (int dy = -visibleRadius; dy <= visibleRadius; dy++) {
                 int g = board.get(x + dx, y + dy);
                 num += (int) Math.pow(board.getSettings().stateCount, i) * g;
                 i++;

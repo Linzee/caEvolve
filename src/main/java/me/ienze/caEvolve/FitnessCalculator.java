@@ -5,7 +5,6 @@ package me.ienze.caEvolve;
  */
 public interface FitnessCalculator {
 
-    void calculateFitnesses(CA[] cas);
+    double[] calculateFitnesses(CA[] cas);
 
-    CA[] getLastCalculated();
 }

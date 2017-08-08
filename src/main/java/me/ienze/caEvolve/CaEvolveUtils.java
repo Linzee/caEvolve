@@ -14,9 +14,9 @@ public class CaEvolveUtils {
     }
 
     public void mutate(DeterministicCA ca) {
-        for(int i=0; i<settings.getPossibleStatesCount(); i++) {
-            if(settings.random.nextFloat() < settings.mutateGeneChance) {
-                ca.transitions[i] = settings.random.nextInt(settings.stateCount);
+        for (int i = 0; i < settings.getPossibleStatesCount(); i++) {
+            if (settings.random.nextFloat() < settings.mutateGeneChance) {
+                ca.getTransitions()[i] = settings.random.nextInt(settings.stateCount);
             }
         }
     }
@@ -25,14 +25,14 @@ public class CaEvolveUtils {
         DeterministicCA ca = new DeterministicCA(settings);
 
         for (int i = 0; i < settings.getPossibleStatesCount(); ++i) {
-            ca.transitions[i] = settings.random.nextBoolean() ? ca1.transitions[i] : ca2.transitions[i];
+            ca.getTransitions()[i] = settings.random.nextBoolean() ? ca1.getTransitions()[i] : ca2.getTransitions()[i];
         }
 
         return ca;
     }
 
     public void mutate(CA ca) {
-        if(ca instanceof DeterministicCA) {
+        if (ca instanceof DeterministicCA) {
             mutate((DeterministicCA) ca);
         } else {
             throw new IllegalArgumentException("This type of CA is not supported");
@@ -40,7 +40,7 @@ public class CaEvolveUtils {
     }
 
     public CA crossover(CA ca1, CA ca2) {
-        if(ca1 instanceof DeterministicCA && ca2 instanceof DeterministicCA) {
+        if (ca1 instanceof DeterministicCA && ca2 instanceof DeterministicCA) {
             return crossover((DeterministicCA) ca1, (DeterministicCA) ca2);
         } else {
             throw new IllegalArgumentException("This type of CA is not supported");

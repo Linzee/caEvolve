@@ -1,5 +1,7 @@
 package me.ienze.caEvolve;
 
+import me.ienze.caEvolve.fitness.ChessFitnessCalculator;
+
 import java.util.Random;
 
 /**
@@ -9,17 +11,19 @@ public class CaEvolveSettings {
 
     public final Random random = new Random();
 
-    public final int stateCount = 3;
+    public final int stateCount = 2;
     public final int visibleRadius = 1;
-    public final int boardWidth = 20;
-    public final int boardHeight = 20;
+    public final int boardWidth = 4;
+    public final int boardHeight = 4;
     public final int boardSteps = 8;
-    public final int poolSize = 400;
+    public final int poolSize = 100;
 
     public final float mutateCaChance = 0.30f;
     public final float mutateGeneChance = 0.30f;
 
+    public final FitnessCalculator fitnessCalculator = new ChessFitnessCalculator(1);
+
     public int getPossibleStatesCount() {
-        return (int) Math.pow(stateCount, (visibleRadius*2+1)*(visibleRadius*2+1));
+        return (int) Math.pow(stateCount, (visibleRadius * 2 + 1) * (visibleRadius * 2 + 1));
     }
 }
