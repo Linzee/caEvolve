@@ -11,7 +11,7 @@ public class SolidFitnessCalculator implements FitnessCalculator {
 
     private int idealColor;
 
-    public SolidFitnessCalculator() {
+    public SolidFitnessCalculator(int idealColor) {
         this.idealColor = idealColor;
     }
 
@@ -29,7 +29,7 @@ public class SolidFitnessCalculator implements FitnessCalculator {
             double sum = 0;
             for (int x = 0; x < board.getWidth(); x++) {
                 for (int y = 0; y < board.getHeight(); y++) {
-                    sum += board.get(x, y) == idealColor ? 1 : 0;
+                    sum += (board.get(x, y) == idealColor) ? 1 : 0;
                 }
             }
 

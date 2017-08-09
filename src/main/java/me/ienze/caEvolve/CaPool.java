@@ -43,7 +43,10 @@ public abstract class CaPool<C extends CA> {
         }
 
         //calculate fitnesses
-        fitnessCalculator.calculateFitnesses(cas);
+        double[] fitnesses = fitnessCalculator.calculateFitnesses(cas);
+        for(int i=0; i<cas.length; i++) {
+            cas[i].setFitness(fitnesses[i]);
+        }
 
         //semi sort by fitness
         Arrays.sort(cas, new Comparator<C>() {

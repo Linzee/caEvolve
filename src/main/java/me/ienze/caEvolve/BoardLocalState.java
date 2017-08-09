@@ -22,16 +22,19 @@ public class BoardLocalState implements Iterator<BoardLocalState> {
     }
 
     public boolean hasNext() {
-        return x != board.getWidth()-1 || y != board.getHeight()-1;
+        return y < board.getHeight();
     }
 
     public BoardLocalState next() {
+        BoardLocalState tmp = new BoardLocalState(board, x, y);
+
         x++;
         if (x >= board.getWidth()) {
             x = 0;
             y++;
         }
-        return this;
+
+        return tmp;
     }
 
     public int getNumericRepresentation() {

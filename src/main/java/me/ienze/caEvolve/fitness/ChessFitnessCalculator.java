@@ -44,7 +44,7 @@ public class ChessFitnessCalculator implements FitnessCalculator {
             }
 
             double fitness2 = (sum / (board.getWidth() * board.getHeight()));
-            ca.setFitness((fitness + fitness2) / 2);
+            fitnesses[i] = (fitness + fitness2) / 2;
         }
 
         return fitnesses;
