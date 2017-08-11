@@ -24,6 +24,7 @@ public class CaEvolveGui extends JFrame {
     private JScrollPane mainContainerScroll;
     private JPanel mainContainer;
     private JLabel labelGeneration;
+    private JButton buttonSettings;
 
     public CaEvolveGui(CaEvolve caEvolve) {
         this.caEvolve = caEvolve;
@@ -44,6 +45,15 @@ public class CaEvolveGui extends JFrame {
         buttonNextGeneration.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 caEvolve.getPool().nextGeneration();
+            }
+        });
+
+        buttonSettings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                SettingsGui settingsGui = new SettingsGui(caEvolve.getSettings());
+                settingsGui.pack();
+                settingsGui.setVisible(true);
             }
         });
 
@@ -86,6 +96,7 @@ public class CaEvolveGui extends JFrame {
         Timer timer = new Timer(3300, timerTaskPerformer);
         timer.setRepeats(true);
         timer.start();
+
     }
 
     private void initCaPreviews() {

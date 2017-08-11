@@ -15,13 +15,13 @@ public class CaEvolveSettings {
     public final int visibleRadius = 1;
     public final int boardWidth = 20;
     public final int boardHeight = 20;
-    public final int boardSteps = 20;
+    public int boardSteps = 20;
     public final int poolSize = 100;
 
-    public final float mutateCaChance = 0.30f;
-    public final float mutateGeneChance = 0.20f;
+    public float mutateCaChance = 0.30f;
+    public float mutateGeneChance = 0.20f;
 
-    public final FitnessCalculator fitnessCalculator = new MoveFitnessCalculator(this, MoveFitnessCalculator.Direction.UP, MoveFitnessCalculator.Direction.RIGHT);
+    public final FitnessCalculator fitnessCalculator = new CombinedFitnessCalculator(new ConstantRatioFitnessCalculator(this), new LargeAreaFitnessCalculator());
 
     public int getPossibleStatesCount() {
         return (int) Math.pow(stateCount, (visibleRadius * 2 + 1) * (visibleRadius * 2 + 1));

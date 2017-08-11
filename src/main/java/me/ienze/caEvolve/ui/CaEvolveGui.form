@@ -43,6 +43,12 @@
               <text value="Generation"/>
             </properties>
           </component>
+          <component id="60148" class="javax.swing.JButton" binding="buttonSettings">
+            <constraints/>
+            <properties>
+              <text value="Settings"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <scrollpane id="dc511" binding="mainContainerScroll">
