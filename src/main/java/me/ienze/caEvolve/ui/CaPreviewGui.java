@@ -3,11 +3,17 @@ package me.ienze.caEvolve.ui;
 import me.ienze.caEvolve.Board;
 import me.ienze.caEvolve.CA;
 import me.ienze.caEvolve.CaEvolveSettings;
+import me.ienze.caEvolve.ca.DeterministicCA;
+import me.ienze.caEvolve.ca.DeterministicCAWriter;
 import me.ienze.twoDimMap.io.DistinctMapImageWriter;
 
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class CaPreviewGui extends JDialog {
 
@@ -20,6 +26,7 @@ public class CaPreviewGui extends JDialog {
     private JButton buttonRestart;
     private JPanel bottomContainer;
     private JButton buttonStep;
+    private JButton buttonSave;
     private Image simulationImage;
     private Board simulationBoard;
 
@@ -46,6 +53,19 @@ public class CaPreviewGui extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 simulationBoard.step(ca);
                 redrawSimulationImage();
+            }
+        });
+
+        buttonSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DeterministicCAWriter dcaw = new DeterministicCAWriter(settings);
+                try(OutputStream out = new FileOutputStream("latest.ca")) {
+                    dcaw.write(out, (DeterministicCA) ca);
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 

@@ -26,9 +26,16 @@ public class CaPreview extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                CaPreviewGui caPreviewGui = new CaPreviewGui(settings, ca);
-                caPreviewGui.pack();
-                caPreviewGui.setVisible(true);
+                switch (mouseEvent.getButton()) {
+                    case 1:
+                        CaPreviewGui caPreviewGui = new CaPreviewGui(settings, ca);
+                        caPreviewGui.pack();
+                        caPreviewGui.setVisible(true);
+                        break;
+                    case 3:
+                        ca.setFitness(1.0);
+                        break;
+                }
             }
 
             @Override
@@ -53,7 +60,7 @@ public class CaPreview extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(ca == null) {
+        if (ca == null) {
             return;
         }
 

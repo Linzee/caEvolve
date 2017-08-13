@@ -10,6 +10,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -32,6 +34,8 @@ public class CaEvolveGui extends JFrame {
         setTitle("CaEvolve");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(1000, 500));
+
+        //setIconImage(new ImageIcon(new URL("http://ienze.me/favicon.ico")).getImage());
 
         setContentPane(wrapperContainer);
 

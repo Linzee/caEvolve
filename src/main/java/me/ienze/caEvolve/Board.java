@@ -14,7 +14,8 @@ public class Board extends DistinctMapLayer implements Iterable<BoardLocalState>
     public Board(CaEvolveSettings settings) {
         super(settings.stateCount, settings.boardWidth, settings.boardHeight);
         this.settings = settings;
-        forEach(state -> set(state.getX(), state.getY(), settings.random.nextInt(settings.stateCount)));
+
+        this.settings.boardInitializer.init(this);
     }
 
     public Board(Board board) {

@@ -43,6 +43,12 @@
               <text value="Step"/>
             </properties>
           </component>
+          <component id="ccb48" class="javax.swing.JButton" binding="buttonSave">
+            <constraints/>
+            <properties>
+              <text value="Save"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>
