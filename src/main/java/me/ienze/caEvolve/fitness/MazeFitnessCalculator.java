@@ -41,20 +41,29 @@ public class MazeFitnessCalculator implements FitnessCalculator {
                         count++; countX1++; countY1++;
                     }
 
-                    sum += (count == 1 || count == 3 || (count == 2 && (countX0 == 2 || countX1 == 2 || countY0 == 2 || countY1 == 2))) ? 1 : 0;
+//                    sum += (count == 1 || count == 3 || (count == 2 && (countX0 == 2 || countX1 == 2 || countY0 == 2 || countY1 == 2))) ? 1 : 0;
 
-                    count1total += (count == 1) ? 1 : 0;
-                    count3total += (count == 3) ? 1 : 0;
-                    countXtotal += (count == 2 && (countX0 == 2 || countX1 == 2) ? 1 : 0);
-                    countYtotal += (count == 2 && (countY0 == 2 || countY1 == 2) ? 1 : 0);
+                    if(count == 1) {
+                        count1total += 1;
+                    } else if(count == 3) {
+                        count3total += 1;
+                    } else if(count == 2 && (countX0 == 2 || countX1 == 2)) {
+                        countXtotal += 1;
+                    } else if(count == 2 && (countY0 == 2 || countY1 == 2)) {
+                        countYtotal += 1;
+                    } else {
+                        sum += 1;
+                    }
                 }
             }
 
-//            sum -= count1total / 5;
-            sum -= count3total / 10;
-            sum -= Math.abs(countXtotal - countYtotal) / 10;
+            for(double d1 : new double[]{count1total, count3total, countXtotal, countYtotal}) {
+                for(double d2 : new double[]{count1total, count3total, countXtotal, countYtotal}) {
+//                    sum += Math.abs(d1 - d2);
+                }
+            }
 
-            double fitness = (sum / (board.getWidth() * board.getHeight()));
+            double fitness = 1 - (sum / (board.getWidth() * board.getHeight()));
             fitnesses[i] = fitness;
         }
 

@@ -20,6 +20,8 @@ public abstract class CaPool<C extends CA> {
     protected C[] cas;
     private C[] oldCas;
 
+    private long nextShowTime;
+
     public CaPool(CaEvolveSettings settings) {
         this.settings = settings;
         this.fitnessCalculator = settings.fitnessCalculator;
@@ -33,7 +35,10 @@ public abstract class CaPool<C extends CA> {
     public void nextGeneration() {
 
         //simulate
+        show("Simulating..");
+        int cai = 0;
         for (CA ca : cas) {
+            show("Simulating "+(cai++)+"/"+cas.length);
             Board board = new Board(settings);
             for (int i = 0; i < settings.boardSteps; i++) {
                 board.step(ca);
@@ -43,12 +48,16 @@ public abstract class CaPool<C extends CA> {
         }
 
         //calculate fitnesses
+        show("Calculating fitness..");
+        cai = 0;
         double[] fitnesses = fitnessCalculator.calculateFitnesses(cas);
         for(int i=0; i<cas.length; i++) {
+            show("Calculating fitness "+(cai++)+"/"+cas.length);
             cas[i].setFitness(fitnesses[i]);
         }
 
         //semi sort by fitness
+        show("Creating new generation..");
         Arrays.sort(cas, new Comparator<C>() {
             public int compare(C c1, C c2) {
                 return Double.compare(c2.getFitness(), c1.getFitness());
@@ -73,7 +82,18 @@ public abstract class CaPool<C extends CA> {
         }
 
         generation++;
-        System.out.println("Generation " + generation);
+        show("## Generation " + generation, true);
+    }
+
+    private void show(String s) {
+        show(s, false);
+    }
+
+    private void show(String s, boolean force) {
+        if(System.currentTimeMillis() >= nextShowTime || force) {
+            nextShowTime = System.currentTimeMillis() + 1000;
+            System.out.println(s);
+        }
     }
 
     public C[] getCas() {

@@ -15,16 +15,16 @@ public class CaEvolveSettings {
 
     public final int stateCount = 2;
     public final int visibleRadius = 1;
-    public final int boardWidth = 30;
-    public final int boardHeight = 30;
-    public int boardSteps = 20;
-    public final int poolSize = 100;
+    public final int boardWidth = 20;
+    public final int boardHeight = 20;
+    public int boardSteps = 10;
+    public final int poolSize = 400;
 
     public float mutateCaChance = 0.36f;
     public float mutateGeneChance = 0.20f;
 
     public final FitnessCalculator fitnessCalculator = new ChessFitnessCalculator(1);
-    public final BoardInitializer boardInitializer = new OneDotBoardInitializer();
+    public final BoardInitializer boardInitializer = new RandomBoardInitializer(this);
 
     public int getPossibleStatesCount() {
         return (int) Math.pow(stateCount, (visibleRadius * 2 + 1) * (visibleRadius * 2 + 1));

@@ -33,7 +33,7 @@ public class SolidFitnessCalculator implements FitnessCalculator {
                 }
             }
 
-            double fitness = 1 - (sum / (board.getWidth() * board.getHeight()));
+            double fitness = (sum / (board.getWidth() * board.getHeight()));
             fitnesses[i] = fitness;
         }
 
