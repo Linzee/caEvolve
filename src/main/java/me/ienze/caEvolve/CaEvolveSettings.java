@@ -15,15 +15,15 @@ public class CaEvolveSettings {
 
     public final int stateCount = 2;
     public final int visibleRadius = 1;
-    public final int boardWidth = 20;
-    public final int boardHeight = 20;
-    public int boardSteps = 10;
-    public final int poolSize = 400;
+    public final int boardWidth = 40;
+    public final int boardHeight = 40;
+    public int boardSteps = 60;
+    public final int poolSize = 100;
 
     public float mutateCaChance = 0.36f;
     public float mutateGeneChance = 0.20f;
 
-    public final FitnessCalculator fitnessCalculator = new ChessFitnessCalculator(1);
+    public final FitnessCalculator fitnessCalculator = new ZeroFitnessCalculator();
     public final BoardInitializer boardInitializer = new RandomBoardInitializer(this);
 
     public int getPossibleStatesCount() {

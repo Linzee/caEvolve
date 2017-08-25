@@ -1,6 +1,7 @@
 package me.ienze.caEvolve;
 
 import me.ienze.caEvolve.ca.DeterministicCA;
+import me.ienze.caEvolve.ca.LifeCA;
 import me.ienze.caEvolve.ca.ProbabilisticCA;
 
 /**
@@ -56,11 +57,31 @@ public class CaEvolveUtils {
         return ca;
     }
 
+    public void mutate(LifeCA ca) {
+        for (int i = 0; i < ca.getTransitions().length; i++) {
+            if (settings.random.nextFloat() < settings.mutateGeneChance) {
+                ca.getTransitions()[i] = settings.random.nextBoolean() ? -1 : settings.random.nextInt(settings.stateCount);
+            }
+        }
+    }
+
+    public LifeCA crossover(LifeCA ca1, LifeCA ca2) {
+        LifeCA ca = new LifeCA(settings);
+
+        for (int i = 0; i < ca.getTransitions().length; i++) {
+            ca.getTransitions()[i] = settings.random.nextBoolean() ? ca1.getTransitions()[i] : ca2.getTransitions()[i];
+        }
+
+        return ca;
+    }
+
     public void mutate(CA ca) {
         if (ca instanceof DeterministicCA) {
             mutate((DeterministicCA) ca);
         } else if (ca instanceof ProbabilisticCA) {
             mutate((ProbabilisticCA) ca);
+        } else if (ca instanceof LifeCA) {
+            mutate((LifeCA) ca);
         } else {
             throw new IllegalArgumentException("This type of CA is not supported");
         }
@@ -71,6 +92,8 @@ public class CaEvolveUtils {
             return crossover((DeterministicCA) ca1, (DeterministicCA) ca2);
         } else if (ca1 instanceof ProbabilisticCA && ca2 instanceof ProbabilisticCA) {
             return crossover((ProbabilisticCA) ca1, (ProbabilisticCA) ca2);
+        } else if (ca1 instanceof LifeCA && ca2 instanceof LifeCA) {
+            return crossover((LifeCA) ca1, (LifeCA) ca2);
         } else {
             throw new IllegalArgumentException("This type of CA is not supported");
         }

@@ -60,4 +60,8 @@ public class BoardLocalState implements Iterator<BoardLocalState> {
     public int getY() {
         return y;
     }
+
+    public Board getBoard() {
+        return board;
+    }
 }
