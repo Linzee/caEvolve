@@ -1,5 +1,6 @@
 package me.ienze.caEvolve;
 
+import me.ienze.caEvolve.ca.DeterministicCA;
 import me.ienze.twoDimMap.io.DistinctMapImageWriter;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.Comparator;
 /**
  * @author ienze
  */
-public abstract class CaPool<C extends CA> {
+public abstract class CaPool<C extends DeterministicCA> {
 
     private final CaEvolveSettings settings;
     private final FitnessCalculator fitnessCalculator;
@@ -37,9 +38,9 @@ public abstract class CaPool<C extends CA> {
         //simulate
         show("Simulating..");
         int cai = 0;
-        for (CA ca : cas) {
+        for (DeterministicCA ca : cas) {
             show("Simulating "+(cai++)+"/"+cas.length);
-            Board board = new Board(settings);
+            Board board = new Board(settings, ca);
             for (int i = 0; i < settings.boardSteps; i++) {
                 board.step(ca);
             }

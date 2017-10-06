@@ -1,5 +1,6 @@
 package me.ienze.caEvolve;
 
+import me.ienze.caEvolve.ca.DeterministicCA;
 import me.ienze.twoDimMap.DistinctMapLayer;
 
 import java.util.Iterator;
@@ -11,11 +12,11 @@ public class Board extends DistinctMapLayer implements Iterable<BoardLocalState>
 
     private CaEvolveSettings settings;
 
-    public Board(CaEvolveSettings settings) {
+    public Board(CaEvolveSettings settings, DeterministicCA ca) {
         super(settings.stateCount, settings.boardWidth, settings.boardHeight);
         this.settings = settings;
 
-        this.settings.boardInitializer.init(this);
+        this.settings.boardInitializer.init(this, ca);
     }
 
     public Board(Board board) {
