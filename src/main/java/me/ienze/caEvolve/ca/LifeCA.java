@@ -5,7 +5,7 @@ import me.ienze.caEvolve.BoardLocalState;
 import me.ienze.caEvolve.CA;
 import me.ienze.caEvolve.CaEvolveSettings;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 /**
  * @author ienze
@@ -16,7 +16,7 @@ public class LifeCA implements CA {
     private int[] transitions;
     private double fitness;
     private Board resultBoard;
-    private Image previewImage;
+    private BufferedImage previewImage;
 
     public LifeCA(CaEvolveSettings settings) {
         this.settings = settings;
@@ -46,12 +46,12 @@ public class LifeCA implements CA {
     }
 
     @Override
-    public Image getPreviewImage() {
+    public BufferedImage getPreviewImage() {
         return previewImage;
     }
 
     @Override
-    public void setPreviewImage(Image image) {
+    public void setPreviewImage(BufferedImage image) {
         previewImage = image;
     }
 

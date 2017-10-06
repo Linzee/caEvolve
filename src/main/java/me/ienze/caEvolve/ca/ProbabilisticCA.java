@@ -6,6 +6,7 @@ import me.ienze.caEvolve.CA;
 import me.ienze.caEvolve.CaEvolveSettings;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 /**
@@ -16,7 +17,7 @@ public class ProbabilisticCA implements CA {
     private double[][] transitions;
     private double fitness;
     private Board resultBoard;
-    private Image previewImage;
+    private BufferedImage previewImage;
 
     public ProbabilisticCA(CaEvolveSettings settings) {
         transitions = new double[settings.getPossibleStatesCount()][settings.stateCount];
@@ -43,12 +44,12 @@ public class ProbabilisticCA implements CA {
     }
 
     @Override
-    public Image getPreviewImage() {
+    public BufferedImage getPreviewImage() {
         return previewImage;
     }
 
     @Override
-    public void setPreviewImage(Image image) {
+    public void setPreviewImage(BufferedImage image) {
         previewImage = image;
     }
 

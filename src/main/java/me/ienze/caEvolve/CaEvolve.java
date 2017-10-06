@@ -1,5 +1,6 @@
 package me.ienze.caEvolve;
 
+import me.ienze.caEvolve.ca.DeterministicCA;
 import me.ienze.caEvolve.ca.LifeCA;
 
 /**
@@ -11,7 +12,7 @@ public class CaEvolve {
     private Object runningLock = new Object();
 
     private CaEvolveSettings settings;
-    private CaPool<LifeCA> pool;
+    private CaPool<DeterministicCA> pool;
 
     public CaEvolve() {
         init();
@@ -62,12 +63,12 @@ public class CaEvolve {
 
         settings = new CaEvolveSettings();
 
-        pool = new CaPool<LifeCA>(settings) {
+        pool = new CaPool<DeterministicCA>(settings) {
             @Override
             public void init() {
-                cas = new LifeCA[settings.poolSize];
+                cas = new DeterministicCA[settings.poolSize];
                 for (int i = 0; i < cas.length; i++) {
-                    cas[i] = new LifeCA(settings);
+                    cas[i] = new DeterministicCA(settings);
                 }
             }
         };
@@ -77,7 +78,7 @@ public class CaEvolve {
         return settings.fitnessCalculator;
     }
 
-    public CaPool<LifeCA> getPool() {
+    public CaPool<DeterministicCA> getPool() {
         return pool;
     }
 
