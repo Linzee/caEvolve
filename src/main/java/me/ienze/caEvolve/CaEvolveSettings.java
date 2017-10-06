@@ -1,6 +1,5 @@
 package me.ienze.caEvolve;
 
-import me.ienze.caEvolve.board.OneDotBoardInitializer;
 import me.ienze.caEvolve.board.RandomBoardInitializer;
 import me.ienze.caEvolve.fitness.*;
 
@@ -16,8 +15,8 @@ public class CaEvolveSettings {
 
     public final int stateCount = 2;
     public final int visibleRadius = 1;
-    public final int boardWidth = 40;
-    public final int boardHeight = 40;
+    public final int boardWidth = 21;
+    public final int boardHeight = 21;
     public int boardSteps = 10;
     public final int poolSize = 20;
 
